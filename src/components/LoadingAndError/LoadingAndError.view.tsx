@@ -2,9 +2,13 @@ import { loadingAndErrorType } from "../../types";
 import { CircularProgress, Box, Typography } from "@mui/material";
 
 const LoadingAndError = (props: loadingAndErrorType) => {
-  const { error, children, status } = props;
+  const { error, children, loading, page } = props;
 
-  if (status === "loading") {
+  if (page > 1) {
+    return <>{children}</>;
+  }
+
+  if (loading) {
     return (
       <Box sx={{ display: "flex" }}>
         <CircularProgress />
@@ -12,7 +16,7 @@ const LoadingAndError = (props: loadingAndErrorType) => {
     );
   }
 
-  if (status === "error") {
+  if (error) {
     return (
       <Typography variant="h1" component="h2" color={"red"}>
         Ops Something Went Wrong

@@ -10,26 +10,24 @@ import {
 
 const MovieTiles = (props: movieType) => {
   const { poster_path , original_title , moviekey, overview } = props;
-  console.log(props)
   return (
     <Card sx={{ maxWidth: 345 }} key={moviekey}>
       <CardMedia
-        sx={{ height: 140 }}
+        sx={{ height: 540 , width: 400}}
         image={"https://image.tmdb.org/t/p/original/" + poster_path}
-        title="green iguana"
+        title={original_title}
       />
-      <CardContent>
+      <CardContent sx={{ maxWidth: 345 }}  >
         <Typography gutterBottom variant="h5" component="div">
           {original_title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+          {overview}
         </Typography>
       </CardContent>
       <CardActions>
         <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <Button size="small">Add To Watchlist</Button>
       </CardActions>
     </Card>
   );
