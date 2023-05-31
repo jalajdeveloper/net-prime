@@ -1,10 +1,6 @@
-import {
-    createBrowserRouter,
-    RouterProvider,
-    Route,
-    Link,
-  } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
   import Movies from "../pages/Movies";
+  import MovieDetail from "../pages/MovieDetailPage";
 
 
 export default createBrowserRouter([
@@ -13,7 +9,7 @@ export default createBrowserRouter([
       element: <Movies/>
     },
     {
-      path: "about",
-      element: <div>About</div>,
+      path: "movie-details/:movieId",
+      element: <MovieDetail/>,
     },
   ]);

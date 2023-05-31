@@ -7,9 +7,11 @@ import {
   Button,
   Typography,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const MovieTiles = (props: movieType) => {
-  const { poster_path , original_title , moviekey, overview } = props;
+  const { poster_path , original_title , moviekey, overview , vote_average , id } = props;
+  
   return (
     <Card sx={{ maxWidth: 345 }} key={moviekey}>
       <CardMedia
@@ -21,13 +23,18 @@ const MovieTiles = (props: movieType) => {
         <Typography gutterBottom variant="h5" component="div">
           {original_title}
         </Typography>
+        <Typography gutterBottom variant="h5" component="div">
+         Rating {vote_average}
+        </Typography>
         <Typography variant="body2" color="text.secondary">
           {overview}
         </Typography>
       </CardContent>
       <CardActions>
         <Button size="small">Share</Button>
-        <Button size="small">Add To Watchlist</Button>
+        <Link to={`movie-details/${id}`}>
+        <Button size="small">See More</Button>
+        </Link>
       </CardActions>
     </Card>
   );

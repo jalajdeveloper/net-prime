@@ -15,7 +15,13 @@ export const counterSlice = createSlice({
   initialState,
   reducers: {
     addMovies: (state, action: PayloadAction<movieType[]>) => {
-       state.movies = [...state.movies , ...action.payload]
+      const movieArray: movieType[] = [...state.movies , ...action.payload];
+      
+      const jsonMovies = movieArray.map((movie: movieType) => JSON.stringify(movie))
+      const uniqueSet = new Set(jsonMovies)
+      const uniqueMovies = Array.from(uniqueSet).map(movie => JSON.parse(movie)) 
+
+       state.movies = uniqueMovies;
     },
   
   },
