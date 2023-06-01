@@ -22,15 +22,13 @@ const FilterBoxs = () => {
     return null;
   };
   
-//year_of_release
-
 const handleChangeYearOfRelease = (e: SelectChangeEvent) =>{
   dispatch(movieFilters({filterType: "year_of_release" , yearOfRelease: e.target.value}))
     return null;
 }
 
 const Orderpayload = order === 'as' ? {order: 'de'} : {order: 'as'}
-console.log(Orderpayload)
+
   return (
     <Box
       sx={{
@@ -97,3 +95,11 @@ console.log(Orderpayload)
 };
 
 export default FilterBoxs;
+
+
+// mongoPass: l1Oy1aenadgUBnOp
+// mongoUser: robinsaini
+
+// url: mongodb+srv://robinsaini:<password>@cluster0.a48iaxt.mongodb.net/?retryWrites=true&w=majority
+
+// mongodb+srv://robinsaini:<l1Oy1aenadgUBnOp>@cluster0.a48iaxt.mongodb.net/?retryWrites=true&w=majority

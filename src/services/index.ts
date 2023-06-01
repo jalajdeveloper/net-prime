@@ -7,3 +7,7 @@ export const instance = axios.create({
 export const movieDetailinstance = axios.create({
     baseURL: `${process.env.REACT_APP_DETAIL_URL}`
 })
+
+export const backEndInstace = axios.create({
+    baseURL: `${process.env.REACT_APP_BACKEND_BASE_URL}`
+})
