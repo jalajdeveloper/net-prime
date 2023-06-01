@@ -5,5 +5,6 @@ export interface loadingAndErrorType {
     error?: boolean | any,
     status?: string | any 
     children: JSX.Element | JSX.Element[],
-    page: number
+    page: number,
+    componentName?: string
 }

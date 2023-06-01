@@ -44,3 +44,10 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+## Architectural decisions
+Decieded to store the all movies in a array to cache so application dont fetch movies from db every time . Another reason to store movies in the array so the users can have smooth transtion between filters and sorting soo user dont have to wait and watch the loader.
+
+## Design assumptions made
+Did not about how much languages and year so i added the myself.

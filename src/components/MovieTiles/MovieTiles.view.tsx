@@ -75,7 +75,7 @@ const MovieTiles = (props: movieType) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <LoadingAndError loading={state.loading} error={state.error} page={0}>
+        <LoadingAndError loading={state.loading} error={state.error} page={0} componentName={"tiles"}>
         {isInWatchList ? (
           <Button size="small">Watched</Button>
         ) : (

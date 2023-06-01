@@ -1,35 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { movieType } from "../../types";
-
-export interface CounterState {
-  movies: movieType[];
-  movieLanguage: string;
-  filterType: string | undefined;
-  yearOfRelease: string,
-  order: string
-}
-
-interface filterPayload {
-    movieLanguage?: string,
-    filterType?: string,
-    yearOfRelease?: string,
-
-}
-
-interface orderPayload {
-  order: string
-}
+import {
+  movieType,
+  CounterState,
+  filterPayload,
+  orderPayload,
+} from "../../types";
 
 const initialState: CounterState = {
   movies: [],
   movieLanguage: "",
-  filterType: "", 
+  filterType: "",
   yearOfRelease: "",
   order: "random",
 };
-
-
 
 export const counterSlice = createSlice({
   name: "movies",
@@ -48,49 +32,52 @@ export const counterSlice = createSlice({
 
       state.movies = uniqueMovies;
     },
-    sortMoviesByRating: (state ,action: PayloadAction<orderPayload> ) => {
-      const { type , payload: {order} } = action;
-      console.log(order)
-      let sortedByRating: movieType[] = []
-     if (order === "as"){
-       sortedByRating = ([...state.movies] || []).sort(
-        (a: movieType, b: movieType) => {
-          if (a["vote_average"] > b["vote_average"]) {
-            return 1;
-          } else {
-            return -1;
+    sortMoviesByRating: (state, action: PayloadAction<orderPayload>) => {
+      const {
+        type,
+        payload: { order },
+      } = action;
+      console.log(order);
+      let sortedByRating: movieType[] = [];
+      if (order === "as") {
+        sortedByRating = ([...state.movies] || []).sort(
+          (a: movieType, b: movieType) => {
+            if (a["vote_average"] > b["vote_average"]) {
+              return 1;
+            } else {
+              return -1;
+            }
           }
-        }
-      );
-     } else if(order === "de"){
-      sortedByRating = ([...state.movies] || []).sort(
-        (a: movieType, b: movieType) => {
-          if (a["vote_average"] > b["vote_average"]) {
-            return -1;
-          } else {
-            return 1;
+        );
+      } else if (order === "de") {
+        sortedByRating = ([...state.movies] || []).sort(
+          (a: movieType, b: movieType) => {
+            if (a["vote_average"] > b["vote_average"]) {
+              return -1;
+            } else {
+              return 1;
+            }
           }
-        }
-      );
-     }
+        );
+      }
 
-     state.order = order;
+      state.order = order;
       state.movies = sortedByRating;
     },
 
     movieFilters: (state, action: PayloadAction<filterPayload>) => {
-        const { type , payload } = action;
-        state.filterType = payload?.filterType
-        if(payload.movieLanguage){
-            state.movieLanguage = payload.movieLanguage
-        } else if(payload.yearOfRelease) {
-            state.yearOfRelease = payload.yearOfRelease
-        }
+      const { type, payload } = action;
+      state.filterType = payload?.filterType;
+      if (payload.movieLanguage) {
+        state.movieLanguage = payload.movieLanguage;
+      } else if (payload.yearOfRelease) {
+        state.yearOfRelease = payload.yearOfRelease;
+      }
     },
-    
   },
 });
 
-export const { addMovies, sortMoviesByRating , movieFilters } = counterSlice.actions;
+export const { addMovies, sortMoviesByRating, movieFilters } =
+  counterSlice.actions;
 
 export default counterSlice.reducer;
