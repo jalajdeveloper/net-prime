@@ -11,9 +11,12 @@ import { addMovies } from "../../redux/slices/movies.slice";
 import FilterBoxs from "../../components/FilterBoxs";
 
 const Movies = () => {
-  const { movies: allMovies, filterType, movieLanguage, yearOfRelease } = useSelector(
-    (state: RootState) => state.movies
-  );
+  const {
+    movies: allMovies,
+    filterType,
+    movieLanguage,
+    yearOfRelease,
+  } = useSelector((state: RootState) => state.movies);
   const dispatch: AppDispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [state, setState] = useState<any>({
@@ -44,12 +47,14 @@ const Movies = () => {
   }, [page]);
 
   const movies: movieType[] = useMemo(() => {
-    console.log(filterType, yearOfRelease, movieLanguage)
     let filterMovies: movieType[] = [];
     if (filterType === "language") {
+      if (movieLanguage === "all") {
+        return allMovies;
+      }
+
       for (let i = 0; i < allMovies.length; i++) {
         const movie: movieType = allMovies[i];
-        console.log(movie.original_language === movieLanguage , movie.original_language , movieLanguage)
         if (movie.original_language === movieLanguage) {
           filterMovies.push(movie);
         }
@@ -61,7 +66,12 @@ const Movies = () => {
     if (filterType === "year_of_release") {
       for (let i = 0; i < allMovies.length; i++) {
         const movie: movieType = allMovies[i];
-        if (movie.original_language === yearOfRelease) {
+        if (yearOfRelease === "all_years") {
+          return allMovies;
+        }
+        if (
+          (movie.release_date || "0000-00-00").split("-")[0] === yearOfRelease
+        ) {
           filterMovies.push(movie);
         }
       }
@@ -69,8 +79,8 @@ const Movies = () => {
     }
 
     return allMovies;
-  }, [page, filterType, yearOfRelease, movieLanguage , allMovies]);
-console.log(movies)
+  }, [page, filterType, yearOfRelease, movieLanguage, allMovies]);
+
   return (
     <LoadingAndError error={state.error} loading={state.loading} page={page}>
       <FilterBoxs />

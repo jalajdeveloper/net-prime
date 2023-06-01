@@ -6,21 +6,30 @@ export interface CounterState {
   movies: movieType[];
   movieLanguage: string;
   filterType: string | undefined;
-  yearOfRelease: string
+  yearOfRelease: string,
+  order: string
 }
 
 interface filterPayload {
     movieLanguage?: string,
     filterType?: string,
-    yearOfRelease?: string
+    yearOfRelease?: string,
+
+}
+
+interface orderPayload {
+  order: string
 }
 
 const initialState: CounterState = {
   movies: [],
   movieLanguage: "",
   filterType: "", 
-  yearOfRelease: ""
+  yearOfRelease: "",
+  order: "random",
 };
+
+
 
 export const counterSlice = createSlice({
   name: "movies",
@@ -39,8 +48,12 @@ export const counterSlice = createSlice({
 
       state.movies = uniqueMovies;
     },
-    sortMoviesByRating: (state) => {
-      const sortedByRating = ([...state.movies] || []).sort(
+    sortMoviesByRating: (state ,action: PayloadAction<orderPayload> ) => {
+      const { type , payload: {order} } = action;
+      console.log(order)
+      let sortedByRating: movieType[] = []
+     if (order === "as"){
+       sortedByRating = ([...state.movies] || []).sort(
         (a: movieType, b: movieType) => {
           if (a["vote_average"] > b["vote_average"]) {
             return 1;
@@ -49,6 +62,19 @@ export const counterSlice = createSlice({
           }
         }
       );
+     } else if(order === "de"){
+      sortedByRating = ([...state.movies] || []).sort(
+        (a: movieType, b: movieType) => {
+          if (a["vote_average"] > b["vote_average"]) {
+            return -1;
+          } else {
+            return 1;
+          }
+        }
+      );
+     }
+
+     state.order = order;
       state.movies = sortedByRating;
     },
 
@@ -61,6 +87,7 @@ export const counterSlice = createSlice({
             state.yearOfRelease = payload.yearOfRelease
         }
     },
+    
   },
 });
 

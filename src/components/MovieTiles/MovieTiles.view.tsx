@@ -10,8 +10,7 @@ import {
 import { Link } from "react-router-dom";
 
 const MovieTiles = (props: movieType) => {
-  const { poster_path , original_title , moviekey, overview , vote_average , id } = props;
-  
+  const { poster_path , original_title , moviekey, overview , vote_average , id  ,release_date } = props;
   return (
     <Card sx={{ maxWidth: 345 }} key={moviekey}>
       <CardMedia
@@ -25,6 +24,9 @@ const MovieTiles = (props: movieType) => {
         </Typography>
         <Typography gutterBottom variant="h5" component="div">
          Rating {vote_average}
+        </Typography>
+        <Typography gutterBottom variant="h5" component="div">
+        Release Date {release_date}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {overview}
