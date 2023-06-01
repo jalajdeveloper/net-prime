@@ -1,10 +1,7 @@
-import {
-  Box,
-  CircularProgress,
-} from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import { AxiosResponse, AxiosError } from "axios";
 import { getMovies } from "../../services/Apis/movies";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import LoadingAndError from "../../components/LoadingAndError";
 import MovieTiles from "../../components/MovieTiles";
 import { movieType } from "../../types";
@@ -14,14 +11,15 @@ import { addMovies } from "../../redux/slices/movies.slice";
 import FilterBoxs from "../../components/FilterBoxs";
 
 const Movies = () => {
-  const { movies } = useSelector((state: RootState) => state.movies);
+  const { movies: allMovies, filterType, movieLanguage, yearOfRelease } = useSelector(
+    (state: RootState) => state.movies
+  );
   const dispatch: AppDispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [state, setState] = useState<any>({
     loading: false,
     error: false,
   });
-
 
   useEffect(() => {
     window.onscroll = function () {
@@ -45,9 +43,37 @@ const Movies = () => {
       });
   }, [page]);
 
+  const movies: movieType[] = useMemo(() => {
+    console.log(filterType, yearOfRelease, movieLanguage)
+    let filterMovies: movieType[] = [];
+    if (filterType === "language") {
+      for (let i = 0; i < allMovies.length; i++) {
+        const movie: movieType = allMovies[i];
+        console.log(movie.original_language === movieLanguage , movie.original_language , movieLanguage)
+        if (movie.original_language === movieLanguage) {
+          filterMovies.push(movie);
+        }
+      }
+
+      return filterMovies;
+    }
+
+    if (filterType === "year_of_release") {
+      for (let i = 0; i < allMovies.length; i++) {
+        const movie: movieType = allMovies[i];
+        if (movie.original_language === yearOfRelease) {
+          filterMovies.push(movie);
+        }
+      }
+      return filterMovies;
+    }
+
+    return allMovies;
+  }, [page, filterType, yearOfRelease, movieLanguage , allMovies]);
+console.log(movies)
   return (
     <LoadingAndError error={state.error} loading={state.loading} page={page}>
-        <FilterBoxs/>
+      <FilterBoxs />
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: "5vh" }}>
         {movies.map((data: movieType, index: number) => (
           <MovieTiles
