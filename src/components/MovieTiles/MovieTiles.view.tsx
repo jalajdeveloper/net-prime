@@ -75,7 +75,7 @@ const MovieTiles = (props: movieType) => {
       />
       <CardContent sx={{ maxWidth: 345 ,marginBottom:'30px'}} data-testid="test-movies-title">
         <Typography gutterBottom variant="h5" component="div">
-          {VoteAverage}
+          {OriginalTitle}
         </Typography>
         <Typography gutterBottom variant="h5" component="div" data-testid="test-movies-rating">
           Rating {VoteAverage}
