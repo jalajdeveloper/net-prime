@@ -1,5 +1,6 @@
 module.exports = {
     root: true,
+    ignorePatterns: ["node_modules/@mui/system/**"],
     plugins: ['@typescript-eslint', 'import', 'prettier'],
     extends: [
       'airbnb-typescript/base',
@@ -11,4 +12,18 @@ module.exports = {
     parserOptions: {
       project: './tsconfig.eslint.json',
     },
+    rules: {
+        // Other rules...
+        "@typescript-eslint/no-unused-expressions": "off",
+        // Ignore PascalCase for interface names
+        '@typescript-eslint/naming-convention': [
+          'error',
+          {
+            selector: 'interface',
+            format: ['camelCase'],
+            leadingUnderscore: 'allow',
+          },
+        ],
+      },
+      
   };

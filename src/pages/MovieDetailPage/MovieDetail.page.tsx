@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { Box } from "@mui/material";
 import { loadingAndState } from "../../types";
 import { movieType } from "../../types";
-import { AxiosError, AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 import { CardMedia, Typography } from "@mui/material";
 import LoadingAndError from "../../components/LoadingAndError";
 
@@ -21,7 +21,7 @@ const MovieDetail = () => {
     setState((prv: loadingAndState) => ({ ...prv, loading: true }));
     getMovieDetail(movieId)
       .then((res: AxiosResponse) => setMovie(res.data))
-      .catch((err: AxiosError) => {
+      .catch(() => {
         setState((prv: loadingAndState) => ({ ...prv, error: true }));
       })
       .finally(() => {

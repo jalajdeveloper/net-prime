@@ -1,10 +1,7 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import { Provider, useSelector } from "react-redux";
+import { render, screen } from "@testing-library/react";
 import LoadingAndError from "../components/LoadingAndError";
 import FilterBoxs from "../components/FilterBoxs/FilterBoxs.view";
 import MovieDetail from "../pages/MovieDetailPage/MovieDetail.page";
-import { BrowserRouter } from "react-router-dom";
-import { store } from "../redux/store";
 jest.mock("react-redux", () => ({
   useSelector: jest.fn(),
 }));

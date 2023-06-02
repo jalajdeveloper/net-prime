@@ -2,12 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import {
   movieType,
-  CounterState,
+  moviesState,
   filterPayload,
   orderPayload,
 } from "../../types";
 
-const initialState: CounterState = {
+const initialState: moviesState = {
   movies: [],
   movieLanguage: "",
   filterType: "",
@@ -34,14 +34,13 @@ export const counterSlice = createSlice({
     },
     sortMoviesByRating: (state, action: PayloadAction<orderPayload>) => {
       const {
-        type,
         payload: { order },
       } = action;
       let sortedByRating: movieType[] = [];
       if (order === "as") {
         sortedByRating = ([...state.movies] || []).sort(
           (a: movieType, b: movieType) => {
-            if (a["vote_average"] > b["vote_average"]) {
+            if (a.vote_average > b.vote_average) {
               return 1;
             } else {
               return -1;
@@ -51,7 +50,7 @@ export const counterSlice = createSlice({
       } else if (order === "de") {
         sortedByRating = ([...state.movies] || []).sort(
           (a: movieType, b: movieType) => {
-            if (a["vote_average"] > b["vote_average"]) {
+            if (a.vote_average > b.vote_average) {
               return -1;
             } else {
               return 1;
@@ -65,7 +64,7 @@ export const counterSlice = createSlice({
     },
 
     movieFilters: (state, action: PayloadAction<filterPayload>) => {
-      const { type, payload } = action;
+      const { payload } = action;
       state.filterType = payload?.filterType;
       if (payload.movieLanguage) {
         state.movieLanguage = payload.movieLanguage;

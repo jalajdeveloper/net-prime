@@ -50,7 +50,7 @@ describe('MovieDetail component', () => {
    (api.getMovieDetail as jest.Mock).mockResolvedValue({
       data: { results: movieMock },
     });
-    const {  getByText } = render(
+     render(
       <MemoryRouter initialEntries={['/movies/37165']}>
         <Routes>
         <Route path="/movies/:movieId" Component={(MovieDetail)} />

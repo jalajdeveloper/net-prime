@@ -1,6 +1,6 @@
 import { movieType } from "./movie.type";
 
-export interface CounterState {
+export interface moviesState {
     movies: movieType[];
     movieLanguage: string;
     filterType: string | undefined;

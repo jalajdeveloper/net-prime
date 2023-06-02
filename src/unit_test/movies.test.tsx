@@ -1,25 +1,22 @@
-import { render, screen, fireEvent, waitFor , getByRole} from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import Movies from "../pages/Movies/Movies.page";
 import { store } from "../redux/store";
 import moviesMock from "./__mocks__/movie.mocks.json";
 import * as api from "../services/Apis/movies";
-import { movieType } from "../types";
-import UserEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom/extend-expect";
-import { LabelImportantSharp } from "@mui/icons-material";
 
-const asendingMovies: any = ([...moviesMock] || []).sort((a: any, b: any) => {
-  if (a["vote_average"] > b["vote_average"]) {
+const asendingMovies = ([...moviesMock] || []).sort((a, b) => {
+  if (a.vote_average > b.vote_average) {
     return 1;
   } else {
     return -1;
   }
 });
 
-const decendingMovies: any = ([...moviesMock] || []).sort((a: any, b: any) => {
-  if (a["vote_average"] > b["vote_average"]) {
+const decendingMovies = ([...moviesMock] || []).sort((a, b) => {
+  if (a.vote_average > b.vote_average) {
     return -1;
   } else {
     return 1;
@@ -78,7 +75,7 @@ describe("MovieComponet", () => {
           sliceTextTo150Words(movie.overview)
         );
       });
-      watchList.forEach((button: any) => {
+      watchList.forEach((button) => {
         fireEvent.click(button);
         expect(button).toHaveTextContent("Watched");
       });
@@ -86,13 +83,13 @@ describe("MovieComponet", () => {
 
       const asendingRating = screen.getAllByTestId("test-movies-rating");
 
-      asendingMovies.forEach((movie: movieType, i: number) => {
+      asendingMovies.forEach((movie, i) => {
         expect(asendingRating[i]).toHaveTextContent(`${movie.vote_average}`);
       });
 
       fireEvent.click(sortingByRating);
       const decendingRating = screen.getAllByTestId("test-movies-rating");
-      decendingMovies.forEach((movie: movieType, i: number) => {
+      decendingMovies.forEach((movie, i) => {
         expect(decendingRating[i]).toHaveTextContent(`${movie.vote_average}`);
       });
       fireEvent.click(languageSelect);
