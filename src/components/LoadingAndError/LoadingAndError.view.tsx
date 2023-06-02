@@ -2,7 +2,7 @@ import { loadingAndErrorType } from "../../types";
 import { CircularProgress, Box, Typography } from "@mui/material";
 
 const LoadingAndError = (props: loadingAndErrorType) => {
-  const { error, children, loading, page, componentName = "none" } = props;
+  const { error, children, loading, page = 0, componentName = "none" } = props;
 
   if (page > 1) {
     return <div role='childrenDiv'>{children}</div>;

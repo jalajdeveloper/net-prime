@@ -52,9 +52,10 @@ const Orderpayload = order === 'as' ? {order: 'de'} : {order: 'as'}
             label="Language"
             defaultValue={"en"}
             onChange={handleChangeLanguage}
+            data-testid="language-select-test"
           >
             <MenuItem value={"all"}>All Languages</MenuItem>
-            <MenuItem value={"en"}>English</MenuItem>
+            <MenuItem value={"en"} data-testid="language-menuItem-test-en">English</MenuItem>
             <MenuItem value={"fr"}>French</MenuItem>
             <MenuItem value={"es"}>Spanish</MenuItem>
             <MenuItem value={"ja"}>Japaness</MenuItem>
@@ -88,6 +89,7 @@ const Orderpayload = order === 'as' ? {order: 'de'} : {order: 'as'}
           variant="outlined"
           sx={{ height: "100%" }}
           onClick={() => dispatch(sortMoviesByRating(Orderpayload))}
+          data-testid="sorting-button-test"
         >
           Sort By Rating {order === "as" ? <ArrowDownwardIcon/> : <ArrowUpwardIcon/>}
         </Button>
