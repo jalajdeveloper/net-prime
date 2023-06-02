@@ -7,7 +7,7 @@ const endPoints: watchListEndPoints = {
   checkWatchList: "check-watch-list",
 };
 
-export const getMovies = (pageNum: number) => {
+export const getMovies = (pageNum: number = 1) => {
   return instance.get(`&page=${pageNum}`);
 };
 
@@ -17,10 +17,10 @@ export const getMovieDetail = (movieId: number | undefined | string | any) => {
   );
 };
 
-export const addToWatchList = (movieId: number) => {
+export const addToWatchList = (movieId: number = 619329) => {
   return backEndInstace.post<watchListRes>(endPoints.addToWatchList, { movieId });
 };
 
-export const checkWatchList = (movieId: number) =>{
+export const checkWatchList = (movieId: number = 988165) =>{
   return backEndInstace.get<watchListRes>(`${endPoints.checkWatchList}/${movieId}`);
 }

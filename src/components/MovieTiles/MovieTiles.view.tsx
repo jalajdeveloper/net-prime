@@ -66,32 +66,32 @@ const MovieTiles = (props: movieType) => {
   }, []);
 
   return (
-    <AutoWidthCard key={moviekey} sx={{position: "relative"}}>
+    <AutoWidthCard key={moviekey} sx={{position: "relative"}} data-testid="test-movies-id">
       <CardMedia
         sx={{ height: 540, width: "100%" }}
         image={"https://image.tmdb.org/t/p/original/" + poster_path}
         title={original_title}
       />
-      <CardContent sx={{ maxWidth: 345 ,marginBottom:'30px'}}>
+      <CardContent sx={{ maxWidth: 345 ,marginBottom:'30px'}} data-testid="test-movies-title">
         <Typography gutterBottom variant="h5" component="div">
           {original_title}
         </Typography>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography gutterBottom variant="h5" component="div" data-testid="test-movies-rating">
           Rating {vote_average}
         </Typography>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography gutterBottom variant="h5" component="div" data-testid="test-movies-release-data">
           Release Date {release_date}
         </Typography>
-       <Typography variant="body2" color="text.secondary">
+       <Typography variant="body2" color="text.secondary" data-testid="test-movies-title-overview">
           {slicedText}
         </Typography>
       </CardContent>
       <CardActions sx={{position: "absolute !important" , bottom: "0 !important"}}>
         <LoadingAndError loading={state.loading} error={state.error} page={0} componentName={"tiles"}>
         {isInWatchList ? (
-          <Button size="small">Watched</Button>
+          <Button size="small" data-testid="test-watched-button">Watched</Button>
         ) : (
-          <Button size="small" onClick={() => addMovieToWatchList(id)}>
+          <Button size="small" onClick={() => addMovieToWatchList(id)} data-testid="test-watched-button">
             Add In Watched
           </Button>
         )}
