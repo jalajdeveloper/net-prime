@@ -84,7 +84,7 @@ const Movies = () => {
   return (
     <LoadingAndError error={state.error} loading={state.loading} page={page}>
       <FilterBoxs />
-      <Box sx={{ display: "flex", flexWrap: "wrap", gap: "5vh" }}>
+      <Box sx={{ display: "flex", flexWrap: "wrap", gap: "1%" , paddingLeft: "2%" , paddingRight: "2%" }}>
         {movies.map((data: movieType, index: number) => (
           <MovieTiles
             {...data}

@@ -13,8 +13,12 @@ import { AxiosError , AxiosResponse } from "axios";
 import { loadingAndState } from "../../types";
 import { useState , useEffect } from "react";
 import LoadingAndError from "../LoadingAndError";
+import { styled } from '@mui/system';
 
-
+const AutoWidthCard = styled(Card)(({ theme }) => ({
+  flex: '1 1 auto',
+  marginTop: "2%"
+}));
 
 const MovieTiles = (props: movieType) => {
   const {
@@ -54,13 +58,13 @@ const MovieTiles = (props: movieType) => {
   }, []);
 
   return (
-    <Card sx={{ maxWidth: 345 }} key={moviekey}>
+    <AutoWidthCard key={moviekey} sx={{position: "relative"}}>
       <CardMedia
-        sx={{ height: 540, width: 400 }}
+        sx={{ height: 540, width: "100%" }}
         image={"https://image.tmdb.org/t/p/original/" + poster_path}
         title={original_title}
       />
-      <CardContent sx={{ maxWidth: 345 }}>
+      <CardContent sx={{ maxWidth: 345 , height: 400}}>
         <Typography gutterBottom variant="h5" component="div">
           {original_title}
         </Typography>
@@ -70,11 +74,11 @@ const MovieTiles = (props: movieType) => {
         <Typography gutterBottom variant="h5" component="div">
           Release Date {release_date}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+       <Typography variant="body2" color="text.secondary">
           {overview}
         </Typography>
       </CardContent>
-      <CardActions>
+      <CardActions sx={{position: "absolute !important" , bottom: "0 !important"}}>
         <LoadingAndError loading={state.loading} error={state.error} page={0} componentName={"tiles"}>
         {isInWatchList ? (
           <Button size="small">Watched</Button>
@@ -89,7 +93,7 @@ const MovieTiles = (props: movieType) => {
         </Link>
 
       </CardActions>
-    </Card>
+    </AutoWidthCard>
   );
 };
 

@@ -37,7 +37,6 @@ export const counterSlice = createSlice({
         type,
         payload: { order },
       } = action;
-      console.log(order);
       let sortedByRating: movieType[] = [];
       if (order === "as") {
         sortedByRating = ([...state.movies] || []).sort(
