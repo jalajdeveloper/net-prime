@@ -17,7 +17,6 @@
     "@types/react-dom": "^18.2.4",
     "axios": "^1.4.0",
     "axios-mock-adapter": "^1.21.4",
-    "jest": "^27.5.1",
     "jest-mock-axios": "^4.7.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -59,5 +58,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "jest": "^29.5.0",
+    "react-testing-library": "^8.0.1"
   }
 }
