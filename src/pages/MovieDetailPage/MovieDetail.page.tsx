@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { getMovieDetail } from "../../services/Apis/movies";
 import { useParams } from "react-router-dom";

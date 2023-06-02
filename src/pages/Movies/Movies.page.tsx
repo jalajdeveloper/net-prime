@@ -1,3 +1,5 @@
+
+import React from "react";
 import { Box, CircularProgress } from "@mui/material";
 import { AxiosResponse, AxiosError } from "axios";
 import { getMovies } from "../../services/Apis/movies";

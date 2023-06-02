@@ -10,9 +10,9 @@ jest.mock("react-redux", () => ({
 }));
 
 describe("Loading or error", () => {
-  it('render', () => {
+  it("render", () => {
     render(
-          <MovieDetail />
+      <MovieDetail />
     );
 
   });

@@ -1,3 +1,4 @@
+import React from "react";
 import { movieType } from "../../types";
 import {
   Card,
