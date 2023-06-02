@@ -34,6 +34,7 @@ export const counterSlice = createSlice({
     },
     sortMoviesByRating: (state, action: PayloadAction<orderPayload>) => {
       const {
+       
         payload: { order },
       } = action;
       let sortedByRating: movieType[] = [];
