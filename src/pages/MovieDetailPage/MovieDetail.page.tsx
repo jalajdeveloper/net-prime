@@ -31,10 +31,10 @@ const MovieDetail = () => {
 
   return (
     <LoadingAndError error={state.error} loading={state.loading} page={0}>
-      <Box sx={{ display: "flex", gap: "2%" }}>
-        <div style={{ width: "50%" }}>
+      <Box sx={{ display: "flex", gap: "2%" , paddingLeft:'5%',paddingRight:'10%', paddingTop:'20px' }}>
+        <div style={{width:'1000px'}}>
           <CardMedia
-            sx={{ height: 895, width: 800 }}
+            sx={{ height: 750, width: 650 }}
             image={"https://image.tmdb.org/t/p/original/" + movie?.poster_path}
             title={movie?.original_title}
           />

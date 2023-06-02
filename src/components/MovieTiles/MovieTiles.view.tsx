@@ -44,6 +44,14 @@ const MovieTiles = (props: movieType) => {
       })
       .catch((err: AxiosError) => {});
   };
+  function sliceTextTo150Words(text:string) {
+    text = text.trim();
+    const words = text.split(' ');
+    const slicedWords = words.slice(0, 150);
+    const slicedText = slicedWords.join(' ');
+    return slicedText;
+  }
+   const slicedText = sliceTextTo150Words(overview)
 
   useEffect(() => {
     setState((prv: loadingAndState) => ({ ...prv, loading: true }));
@@ -64,7 +72,7 @@ const MovieTiles = (props: movieType) => {
         image={"https://image.tmdb.org/t/p/original/" + poster_path}
         title={original_title}
       />
-      <CardContent sx={{ maxWidth: 345 , height: 400}}>
+      <CardContent sx={{ maxWidth: 345 ,marginBottom:'30px'}}>
         <Typography gutterBottom variant="h5" component="div">
           {original_title}
         </Typography>
@@ -75,7 +83,7 @@ const MovieTiles = (props: movieType) => {
           Release Date {release_date}
         </Typography>
        <Typography variant="body2" color="text.secondary">
-          {overview}
+          {slicedText}
         </Typography>
       </CardContent>
       <CardActions sx={{position: "absolute !important" , bottom: "0 !important"}}>
