@@ -34,15 +34,15 @@ const MovieDetail = () => {
       <Box sx={{ display: "flex", gap: "2%" }}>
         <div style={{ width: "50%" }}>
           <CardMedia
-            sx={{ height: 1100, width: 800 }}
+            sx={{ height: 895, width: 800 }}
             image={"https://image.tmdb.org/t/p/original/" + movie?.poster_path}
             title={movie?.original_title}
           />
-          <Typography variant="h3" color="text.secondary">
-            {movie?.original_title}
-          </Typography>
         </div>
         <div>
+        <Typography variant="h3" color="text.secondary">
+            {movie?.original_title}
+          </Typography>
           <Typography variant="h4" color="text.secondary">
             Rating: {movie?.vote_average}
           </Typography>
