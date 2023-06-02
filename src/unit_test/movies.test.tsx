@@ -26,10 +26,7 @@ const decendingMovies: any = ([...moviesMock] || []).sort((a: any, b: any) => {
   }
 });
 
-const englishMovies = moviesMock.filter(
-  (data) => data.original_language === "en"
-);
-//"language-menuItem-test-en"
+
 jest.mock("../services/Apis/movies");
 function sliceTextTo150Words(text: string) {
   text = text.trim();
