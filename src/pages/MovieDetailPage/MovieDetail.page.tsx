@@ -16,7 +16,6 @@ const MovieDetail = () => {
   });
 
   const [movie, setMovie] = useState<movieType>();
-
   useEffect(() => {
     setState((prv: loadingAndState) => ({ ...prv, loading: true }));
     getMovieDetail(movieId)
@@ -30,20 +29,21 @@ const MovieDetail = () => {
   }, []);
 
   return (
-    <LoadingAndError error={state.error} loading={state.loading} page={0}>
-      <Box sx={{ display: "flex",flexWrap: "wrap", gap: "2%" , paddingLeft:'5%',paddingRight:'10%', paddingTop:'20px' }}>
-        <div>
+<LoadingAndError error={state.error} loading={state.loading} page={0}>
+      <Box sx={{ display: "flex",flexWrap: "wrap", gap: "2%" , paddingLeft:'5%',paddingRight:'10%', paddingTop:'20px' }} data-testid="moviesDetailsBox">
+        <div role='mediaCard'>
           <CardMedia
             sx={{ height: 750, width: 650 }}
             image={"https://image.tmdb.org/t/p/original/" + movie?.poster_path}
             title={movie?.original_title}
+            
           />
         </div>
-        <div style={{width: "57%"}}>
-        <Typography variant="h3" color="text.secondary">
+        <div style={{width: "50%"}}>
+        <Typography variant="h3" color="text.secondary" data-testid="test-title">
             {movie?.original_title}
           </Typography>
-          <Typography variant="h4" color="text.secondary">
+          <Typography variant="h4" color="text.secondary" data-testid="test-rating">
             Rating: {movie?.vote_average}
           </Typography>
           <Typography variant="h4" color="text.secondary">
@@ -67,6 +67,8 @@ const MovieDetail = () => {
         </div>
       </Box>
     </LoadingAndError>
+    
+    
   );
 };
 // /popularity

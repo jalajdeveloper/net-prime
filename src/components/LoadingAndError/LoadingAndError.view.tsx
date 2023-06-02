@@ -5,7 +5,7 @@ const LoadingAndError = (props: loadingAndErrorType) => {
   const { error, children, loading, page, componentName = "none" } = props;
 
   if (page > 1) {
-    return <>{children}</>;
+    return <div role='childrenDiv'>{children}</div>;
   }
 
   if (loading) {
@@ -19,8 +19,9 @@ const LoadingAndError = (props: loadingAndErrorType) => {
           alignContent: "center",
           flexWrap: "wrap",
         }}
+        role ='loading-element'
       >
-        <CircularProgress size={componentName === "tiles" ? 30 : 150} />
+        <CircularProgress size={componentName === "tiles" ? 30 : 150} role='loader' />
       </Box>
     );
   }
@@ -31,12 +32,13 @@ const LoadingAndError = (props: loadingAndErrorType) => {
         variant={componentName === "tiles" ? "h6" : "h1"}
         component="h2"
         color={"red"}
+        role = 'errormessage'
       >
-        Ops Something Went Wrong
+        Oops Something Went Wrong
       </Typography>
     );
   }
-  return <>{children}</>;
+  return <div role='childrenlist'>{children}</div>;
 };
 
 export default LoadingAndError;
