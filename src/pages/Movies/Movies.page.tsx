@@ -35,12 +35,13 @@ const Movies = () => {
   }, []);
 
   useEffect(() => {
-    setState((prv: any) => ({ ...prv, loading: true }));
+    setState((prv:any) => ({ ...prv, loading: true }));
     getMovies(page)
       .then((res: AxiosResponse) => {
         dispatch(addMovies(res.data.results));
       })
       .catch((err: AxiosError) => {
+        console.log(err)
         setState((prv: any) => ({ ...prv, error: true }));
       })
       .finally(() => {
@@ -49,7 +50,7 @@ const Movies = () => {
   }, [page]);
 
   const movies: movieType[] = useMemo(() => {
-    let filterMovies: movieType[] = [];
+    const filterMovies: movieType[] = [];
     if (filterType === "language") {
       if (movieLanguage === "all") {
         return allMovies;

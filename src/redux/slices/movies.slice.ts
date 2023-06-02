@@ -34,7 +34,7 @@ export const counterSlice = createSlice({
     },
     sortMoviesByRating: (state, action: PayloadAction<orderPayload>) => {
       const {
-        type,
+       
         payload: { order },
       } = action;
       let sortedByRating: movieType[] = [];
@@ -65,7 +65,7 @@ export const counterSlice = createSlice({
     },
 
     movieFilters: (state, action: PayloadAction<filterPayload>) => {
-      const { type, payload } = action;
+      const {  payload } = action;
       state.filterType = payload?.filterType;
       if (payload.movieLanguage) {
         state.movieLanguage = payload.movieLanguage;
