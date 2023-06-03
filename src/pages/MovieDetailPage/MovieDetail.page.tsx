@@ -19,7 +19,7 @@ const MovieDetail = () => {
   });
   const [isInWatchList, setIsInWatchList] = useState<boolean>(false);
   const [movie, setMovie] = useState<movieType>();
-
+  const [errMessage,setErrorMessage] = useState<string | undefined>()
   useEffect(() => {
     setState((prv: loadingAndState) => ({ ...prv, loading: true }));
     getMovieDetail(movieId)
@@ -60,6 +60,8 @@ const MovieDetail = () => {
     setIsInWatchList(true);
     addToWatchList(addToWatch).then((res: AxiosResponse) => {
       setIsInWatchList(res?.data.movieExist as boolean);
+    }).catch((err) => {
+setErrorMessage(err.response.data.msg)
     });
   };
 
@@ -128,6 +130,7 @@ const MovieDetail = () => {
           <Typography variant="h5" color="text.secondary">
             {movie?.overview}
           </Typography>
+          
         </div>
       </Box>
     </LoadingAndError>
