@@ -1,20 +1,22 @@
-import { instance, movieDetailinstance, backEndInstace } from "..";
+import { backEndInstace } from "..";
 import { watchListEndPoints } from "../../types";
 import { watchListRes } from "../../types";
 
 const endPoints: watchListEndPoints = {
-  addToWatchList: "add-to-watch-list",
-  checkWatchList: "check-watch-list",
+  addToWatchList: "movies/add-to-watch-list",
+  checkWatchList: "movies/check-watch-list",
+  getMoviesPage: "tmdb/movies/get-movies",
+  movieDetails: "tmdb/movies/get-movie-details"
 };
 
+
+
 export const getMovies = (pageNum = 1) => {
-  return instance.get(`&page=${pageNum}`);
+  return backEndInstace.get(`${endPoints.getMoviesPage}/${pageNum}`);
 };
 
 export const getMovieDetail = (movieId: number | undefined | string ) => {
-  return movieDetailinstance.get(
-    `/${movieId}?api_key=${process.env.REACT_APP_TMDB_API}`
-  );
+  return backEndInstace.get(`${endPoints.movieDetails}/${movieId}`)
 };
 
 export const addToWatchList = (movieId = 619329) => {

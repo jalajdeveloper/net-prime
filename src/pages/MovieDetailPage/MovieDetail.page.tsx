@@ -20,7 +20,9 @@ const MovieDetail = () => {
   useEffect(() => {
     setState((prv: loadingAndState) => ({ ...prv, loading: true }));
     getMovieDetail(movieId)
-      .then((res: AxiosResponse) => setMovie(res.data))
+      .then((res: AxiosResponse) => {
+        setMovie(res.data.result)
+      })
       .catch(() => {
         setState((prv: loadingAndState) => ({ ...prv, error: true }));
       })

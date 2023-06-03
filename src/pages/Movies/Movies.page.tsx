@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Box, CircularProgress } from "@mui/material";
-import { AxiosResponse } from "axios";
+import { AxiosResponse , AxiosError} from "axios";
 import { getMovies } from "../../services/Apis/movies";
 import { useEffect, useState, useMemo } from "react";
 import LoadingAndError from "../../components/LoadingAndError";
@@ -39,10 +39,11 @@ const Movies = () => {
     setState((prv: loadingAndState) => ({ ...prv, loading: true }));
     getMovies(page)
       .then((res: AxiosResponse) => {
+        console.log(res)
         dispatch(addMovies(res.data.results));
       })
-      .catch(() => {
-        setState((prv: loadingAndState) => ({ ...prv, error: true }));
+      .catch((err: AxiosError) => {
+        setState((prv: loadingAndState) => ({ ...prv, error: !!err }));
       })
       .finally(() => {
         setState((prv: loadingAndState) => ({ ...prv, loading: false }));

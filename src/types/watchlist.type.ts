@@ -1,4 +1,6 @@
 export interface watchListEndPoints {
     addToWatchList: string,
-    checkWatchList: string
+    checkWatchList: string,
+    getMoviesPage: string,
+    movieDetails: string
   }
