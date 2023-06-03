@@ -1,16 +1,17 @@
-import React from 'react';
-import { Box, CircularProgress } from '@mui/material';
-import { AxiosResponse } from 'axios';
-import { getMovies } from '../../services/Apis/movies';
-import { useEffect, useState, useMemo } from 'react';
-import LoadingAndError from '../../components/LoadingAndError';
-import MovieTiles from '../../components/MovieTiles';
-import { movieType } from '../../types';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState, AppDispatch } from '../../redux/store';
-import { addMovies } from '../../redux/slices/movies.slice';
-import FilterBoxs from '../../components/FilterBoxs';
-import { loadingAndState } from '../../types';
+
+import React from "react";
+import { Box, CircularProgress } from "@mui/material";
+import { AxiosResponse , AxiosError} from "axios";
+import { getMovies } from "../../services/Apis/movies";
+import { useEffect, useState, useMemo } from "react";
+import LoadingAndError from "../../components/LoadingAndError";
+import MovieTiles from "../../components/MovieTiles";
+import { movieType } from "../../types";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, AppDispatch } from "../../redux/store";
+import { addMovies } from "../../redux/slices/movies.slice";
+import FilterBoxs from "../../components/FilterBoxs";
+import { loadingAndState } from "../../types";
 
 const Movies = () => {
   const {
@@ -38,10 +39,11 @@ const Movies = () => {
     setState((prv: loadingAndState) => ({ ...prv, loading: true }));
     getMovies(page)
       .then((res: AxiosResponse) => {
+        console.log(res)
         dispatch(addMovies(res.data.results));
       })
-      .catch(() => {
-        setState((prv: loadingAndState) => ({ ...prv, error: true }));
+      .catch((err: AxiosError) => {
+        setState((prv: loadingAndState) => ({ ...prv, error: !!err }));
       })
       .finally(() => {
         setState((prv: loadingAndState) => ({ ...prv, loading: false }));
