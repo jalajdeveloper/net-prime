@@ -4,3 +4,6 @@ export interface watchListEndPoints {
     getMoviesPage: string,
     movieDetails: string
   }
+
+
+  //
