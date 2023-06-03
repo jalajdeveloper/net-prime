@@ -11,6 +11,7 @@ import { RootState, AppDispatch } from '../../redux/store';
 import { addMovies } from '../../redux/slices/movies.slice';
 import FilterBoxs from '../../components/FilterBoxs';
 import { loadingAndState } from '../../types';
+import { useInView } from 'react-intersection-observer'
 
 const Movies = () => {
   const {
@@ -22,6 +23,7 @@ const Movies = () => {
   } = useSelector((state: RootState) => state.movies);
   const dispatch: AppDispatch = useDispatch();
   const observerTarget = useRef(null);
+  const { ref, inView } = useInView()
   const [previousOrder, setPreviousOrder] = useState<string | undefined>();
   const [page, setPage] = useState(1);
   const [state, setState] = useState<loadingAndState>({
@@ -35,10 +37,12 @@ const Movies = () => {
   };
 
   useEffect(() => {
+    if (inView) {
+      setPage(p => p + 1)
+    }
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          console.log('SDFDF');
           setPage((p) => p + 1);
         }
       },
@@ -48,7 +52,6 @@ const Movies = () => {
         threshold: 1.0,
       }
     );
-    console.log(observer);
     if (observerTarget.current) {
       observer.observe(observerTarget.current);
     }
@@ -58,7 +61,7 @@ const Movies = () => {
     //     observer.unobserve(observerTarget.current);
     //   }
     // };
-  }, [observerTarget]);
+  }, [observerTarget, ref]);
 
   useEffect(() => {
     const selectedOrder = orderObj[order as keyof orderObjType];
@@ -140,16 +143,16 @@ const Movies = () => {
         {movies.map((data: movieType, index: number) => (
           <MovieTiles
             {...data}
-            moviekey={data.id + data.title}
-            key={data.title + index}
+            moviekey={`${index}`}
+            key={`${index}`}
           />
         ))}
-        <div
-          ref={observerTarget}
-          style={{ height: '100px',marginBottom: "10px", border: "2px solid white" }}
-        />
       </Box>
-
+      <div
+          ref={observerTarget}
+          style={{ height: '100px',marginBottom: "100px", border: "2px solid white" }}
+          id='infinite-loader'
+        />
       {loadingInfinty()}
     </LoadingAndError>
   );
