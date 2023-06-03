@@ -29,7 +29,7 @@ const MovieTiles = (props: movieType) => {
 
 
   function sliceTextTo150Words(text: string) {
-    text = text.trim();
+    text = (text || "").trim();
     const words = text.split(' ');
     const slicedWords = words.slice(0, 150);
     const slicedText = slicedWords.join(' ');
