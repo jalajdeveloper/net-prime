@@ -23,7 +23,7 @@ const LoadingAndError = (props: loadingAndErrorType) => {
         role="loading-element"
       >
         <CircularProgress
-          size={componentName === 'tiles' ? 30 : 150}
+          size={componentName === 'tiles' ? 30 : 50}
           role="loader"
         />
       </Box>

@@ -6,8 +6,9 @@ import { Box } from '@mui/material';
 import { loadingAndState } from '../../types';
 import { movieType } from '../../types';
 import { AxiosResponse } from 'axios';
-import { CardMedia, Typography } from '@mui/material';
+import { CardMedia, Typography, Button } from '@mui/material';
 import LoadingAndError from '../../components/LoadingAndError';
+import { addToWatchList, checkWatchList } from '../../services/Apis/movies';
 
 const MovieDetail = () => {
   const { movieId } = useParams();
@@ -15,13 +16,14 @@ const MovieDetail = () => {
     loading: false,
     error: false,
   });
-
+  const [isInWatchList, setIsInWatchList] = useState<boolean>(false);
   const [movie, setMovie] = useState<movieType>();
+
   useEffect(() => {
     setState((prv: loadingAndState) => ({ ...prv, loading: true }));
     getMovieDetail(movieId)
       .then((res: AxiosResponse) => {
-        setMovie(res.data.result)
+        setMovie(res.data.result);
       })
       .catch(() => {
         setState((prv: loadingAndState) => ({ ...prv, error: true }));
@@ -30,6 +32,26 @@ const MovieDetail = () => {
         setState((prv: loadingAndState) => ({ ...prv, loading: false }));
       });
   }, []);
+  useEffect(() => {
+    setState((prv: loadingAndState) => ({ ...prv, loading: true }));
+    checkWatchList(movieId)
+      .then((res: AxiosResponse) =>
+        setIsInWatchList(res?.data.movieExist as boolean)
+      )
+      .catch(() => {
+        setState((prv: loadingAndState) => ({ ...prv, error: true }));
+      })
+      .finally(() => {
+        setState((prv: loadingAndState) => ({ ...prv, loading: false }));
+      });
+  }, []);
+
+  const addMovieToWatchList = () => {
+    setIsInWatchList(true);
+    addToWatchList(movieId).then((res: AxiosResponse) => {
+      setIsInWatchList(res?.data.movieExist as boolean);
+    });
+  };
 
   return (
     <LoadingAndError error={state.error} loading={state.loading} page={0}>
@@ -59,6 +81,21 @@ const MovieDetail = () => {
           >
             {movie?.original_title}
           </Typography>
+
+          {isInWatchList ? (
+            <Button size="small" data-testid="test-watched-button">
+              <Typography variant="h3">Watched</Typography>
+            </Button>
+          ) : (
+            <Button
+              size="large"
+              onClick={() => addMovieToWatchList()}
+              data-testid="test-watched-button"
+            >
+              <Typography variant="h5">Add In Watched</Typography>
+            </Button>
+          )}
+
           <Typography
             variant="h4"
             color="text.secondary"

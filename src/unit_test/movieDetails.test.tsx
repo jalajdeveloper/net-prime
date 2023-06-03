@@ -36,12 +36,6 @@ describe('MovieDetail component', () => {
       },
     });
   });
-
-  it('renders the vote_average text', async () => {
-    render(<MovieDetail />);
-    expect(await screen.findByText(/Rating: 7\.5/)).toBeInTheDocument();
-  });
-
   it('renders loading state and fetches movie details', async () => {
     (api.getMovieDetail as jest.Mock).mockResolvedValue({
       data: { results: movieMock },

@@ -36,13 +36,6 @@ const MovieTiles = (props: movieType) => {
     loading: false,
     error: false,
   });
-
-  const addMovieToWatchList = (id: number) => {
-    setIsInWatchList(true);
-    addToWatchList(id).then((res: AxiosResponse) => {
-      setIsInWatchList(res?.data.movieExist as boolean);
-    });
-  };
   function sliceTextTo150Words(text: string) {
     text = text.trim();
     const words = text.split(' ');
@@ -111,26 +104,6 @@ const MovieTiles = (props: movieType) => {
       <CardActions
         sx={{ position: 'absolute !important', bottom: '0 !important' }}
       >
-        <LoadingAndError
-          loading={state.loading}
-          error={state.error}
-          page={0}
-          componentName={'tiles'}
-        >
-          {isInWatchList ? (
-            <Button size="small" data-testid="test-watched-button">
-              Watched
-            </Button>
-          ) : (
-            <Button
-              size="small"
-              onClick={() => addMovieToWatchList(Id)}
-              data-testid="test-watched-button"
-            >
-              Add In Watched
-            </Button>
-          )}
-        </LoadingAndError>
         <Link to={`movie-details/${Id}`}>
           <Button size="small">See More</Button>
         </Link>

@@ -39,18 +39,19 @@ const FilterBoxs = () => {
     );
     return null;
   };
-
   const Orderpayload = order === 'as' ? { order: 'de' } : { order: 'as' };
-
   return (
     <Box
       sx={{
-        position: 'sticky',
+        position: 'fixed',
         display: 'flex',
-        marginTop: 2,
+        width: '100%',
         marginBottom: 2,
         justifyContent: 'center',
+        backgroundColor: 'white',
+        paddingBottom: '5px',
         gap: '2%',
+        zIndex: '1',
       }}
       role="mainfilterbox"
     >
