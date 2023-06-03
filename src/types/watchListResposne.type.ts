@@ -1,4 +1,4 @@
 export interface watchListRes {
-    msg: string,
-    movieExist: boolean
+  msg: string;
+  movieExist: boolean;
 }

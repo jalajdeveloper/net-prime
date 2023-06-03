@@ -15,7 +15,7 @@ const initialState: moviesState = {
   order: 'random',
 };
 
-export const counterSlice = createSlice({
+export const movieSlice = createSlice({
   name: 'movies',
   initialState,
   reducers: {
@@ -55,6 +55,6 @@ export const counterSlice = createSlice({
 });
 
 export const { addMovies, sortMoviesByRating, movieFilters } =
-  counterSlice.actions;
+movieSlice.actions;
 
-export default counterSlice.reducer;
+export default movieSlice.reducer;

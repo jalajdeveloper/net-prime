@@ -22,7 +22,7 @@ const Movies = () => {
     order
   } = useSelector((state: RootState) => state.movies);
   const dispatch: AppDispatch = useDispatch();
-  const [previousOrder , setPreviousOrder] = useState<string>("")
+  const [previousOrder , setPreviousOrder] = useState<string | undefined>()
   const [page, setPage] = useState(1);
   const [state, setState] = useState<loadingAndState>({
     loading: false,
@@ -30,7 +30,8 @@ const Movies = () => {
   });
 const orderObj: orderObjType = {
   as: "asc",
-  de: "desc"
+  de: "desc",
+  all: undefined
 }
 
   useEffect(() => {
@@ -44,7 +45,6 @@ const orderObj: orderObjType = {
   useEffect(() => {
     
     const selectedOrder = orderObj[(order as keyof orderObjType)] ;
-    console.log(selectedOrder)
    if(previousOrder !== selectedOrder) {
     setPreviousOrder(selectedOrder);
     dispatch(addMovies([]));
@@ -64,11 +64,10 @@ const orderObj: orderObjType = {
 
   const movies: movieType[] = useMemo(() => {
     const filterMovies: movieType[] = [];
-    if (filterType === "language") {
-      if (movieLanguage === "all") {
+    if (filterType === 'language') {
+      if (movieLanguage === 'all') {
         return allMovies;
       }
-
       for (let i = 0; i < allMovies.length; i++) {
         const movie: movieType = allMovies[i];
         if (movie.original_language === movieLanguage) {
@@ -79,14 +78,14 @@ const orderObj: orderObjType = {
       return filterMovies;
     }
 
-    if (filterType === "year_of_release") {
+    if (filterType === 'year_of_release') {
       for (let i = 0; i < allMovies.length; i++) {
         const movie: movieType = allMovies[i];
-        if (yearOfRelease === "all_years") {
+        if (yearOfRelease === 'all_years') {
           return allMovies;
         }
         if (
-          (movie.release_date || "0000-00-00").split("-")[0] === yearOfRelease
+          (movie.release_date || '0000-00-00').split('-')[0] === yearOfRelease
         ) {
           filterMovies.push(movie);
         }
@@ -97,21 +96,30 @@ const orderObj: orderObjType = {
     return allMovies;
   }, [page, filterType, yearOfRelease, movieLanguage, allMovies]);
 
-  const loadingInfinty = () =>{
-    if(page > 1 && state.loading)
-    { 
-      return <Box sx={{ display: "flex", justifyContent: "center" }}>
-      <CircularProgress size="6rem" />
-    </Box>
+  const loadingInfinty = () => {
+    if (page > 1 && state.loading) {
+      return (
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <CircularProgress size="3rem" />
+        </Box>
+      );
     }
 
-    return <div/>
-  }
+    return <div />;
+  };
 
   return (
     <LoadingAndError error={state.error} loading={state.loading} page={page}>
       <FilterBoxs />
-      <Box sx={{ display: "flex", flexWrap: "wrap", gap: "1%" , paddingLeft: "2%" , paddingRight: "2%" }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '1%',
+          paddingLeft: '2%',
+          paddingRight: '2%',
+        }}
+      >
         {movies.map((data: movieType, index: number) => (
           <MovieTiles
             {...data}

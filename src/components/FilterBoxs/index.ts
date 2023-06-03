@@ -1,1 +1,1 @@
-export {default} from "./FilterBoxs.view";
+export { default } from './FilterBoxs.view';
