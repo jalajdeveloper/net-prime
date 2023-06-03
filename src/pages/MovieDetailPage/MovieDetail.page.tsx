@@ -4,11 +4,12 @@ import { getMovieDetail } from '../../services/Apis/movies';
 import { useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { loadingAndState } from '../../types';
-import { movieType } from '../../types';
+import { movieType, watchListType } from '../../types';
 import { AxiosResponse } from 'axios';
 import { CardMedia, Typography, Button } from '@mui/material';
 import LoadingAndError from '../../components/LoadingAndError';
 import { addToWatchList, checkWatchList } from '../../services/Apis/movies';
+
 
 const MovieDetail = () => {
   const { movieId } = useParams();
@@ -48,8 +49,16 @@ const MovieDetail = () => {
   }, []);
 
   const addMovieToWatchList = () => {
+    const addToWatch: watchListType = {
+      id: movie?.id,
+      vote_average: movie?.vote_average,
+      release_date: movie?.release_date,
+      original_title: movie?.original_title,
+      overview: movie?.overview,
+      poster_path: movie?.poster_path,
+  }
     setIsInWatchList(true);
-    addToWatchList(movieId).then((res: AxiosResponse) => {
+    addToWatchList(addToWatch).then((res: AxiosResponse) => {
       setIsInWatchList(res?.data.movieExist as boolean);
     });
   };
@@ -115,9 +124,6 @@ const MovieDetail = () => {
           </Typography>
           <Typography variant="h4" color="text.secondary">
             Vote Count: {movie?.vote_count}
-          </Typography>
-          <Typography variant="h5" color="text.secondary">
-            Popularity: {movie?.popularity}
           </Typography>
           <Typography variant="h5" color="text.secondary">
             {movie?.overview}

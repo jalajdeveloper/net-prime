@@ -16,6 +16,16 @@ export interface movieType {
   moviekey: string;
 }
 
+export interface watchListType {
+    id: number | undefined;
+    original_title: string | undefined;
+    overview: string | undefined;
+    poster_path: string | undefined;
+    release_date: string | undefined;
+    vote_average: number | undefined;
+  
+  }
+
 export interface orderObjType {
     as: string,
     de: string,

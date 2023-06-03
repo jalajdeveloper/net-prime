@@ -9,11 +9,6 @@ import {
   Typography,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { addToWatchList, checkWatchList } from '../../services/Apis/movies';
-import { AxiosResponse } from 'axios';
-import { loadingAndState } from '../../types';
-import { useState, useEffect } from 'react';
-import LoadingAndError from '../LoadingAndError';
 import { styled } from '@mui/system';
 
 const AutoWidthCard = styled(Card)(() => ({
@@ -88,7 +83,7 @@ const MovieTiles = (props: movieType) => {
       <CardActions
         sx={{ position: 'absolute !important', bottom: '0 !important' }}
       >
-        <Link to={`movie-details/${Id}`}>
+        <Link to={`/movie-details/${Id}`}>
           <Button size="small">See More</Button>
         </Link>
       </CardActions>

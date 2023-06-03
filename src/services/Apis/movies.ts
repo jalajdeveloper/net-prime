@@ -1,6 +1,6 @@
 import { backEndInstace } from '..';
-import { watchListEndPoints } from '../../types';
-import { watchListRes } from '../../types';
+import { watchListEndPoints,watchListRes, watchListType } from '../../types';
+
 
 const endPoints: watchListEndPoints = {
   addToWatchList: 'movies/add-to-watch-list',
@@ -23,9 +23,9 @@ export const getMovieDetail = (movieId: number | undefined | string) => {
   return backEndInstace.get(`${endPoints.movieDetails}/${movieId}`);
 };
 
-export const addToWatchList = (movieId: number | unknown = 619329) => {
+export const addToWatchList = (movie: watchListType) => {
   return backEndInstace.post<watchListRes>(endPoints.addToWatchList, {
-    movieId,
+    movie,
   });
 };
 

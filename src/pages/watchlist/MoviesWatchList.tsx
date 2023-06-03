@@ -24,8 +24,8 @@ const MoviesWatchList = () => {
             setWatchList(res.data.results)
       } 
       )
-      .catch(() => {
-        setState((prv: loadingAndState) => ({ ...prv, error: true }));
+      .catch((err: AxiosError) => {
+        setState((prv: loadingAndState) => ({ ...prv, error: !!err }));
       })
       .finally(() => {
         setState((prv: loadingAndState) => ({ ...prv, loading: false }));
@@ -33,17 +33,6 @@ const MoviesWatchList = () => {
   }, []);
   return (
     <LoadingAndError error={state.error} loading={state.loading} page={0}>
-    <Box
-      sx={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '2%',
-        paddingLeft: '5%',
-        paddingRight: '10%',
-        paddingTop: '20px',
-      }}
-      data-testid="moviesDetailsBox"
-    >
       <Box>
         <Typography variant="h4">Your Watchlist</Typography>
       </Box>
@@ -56,9 +45,14 @@ const MoviesWatchList = () => {
           paddingRight: '2%',
         }}
       >
-        {/* <MovieTiles/> */}
+         {watchList.map((data: movieType, index: number) => (
+          <MovieTiles
+            {...data}
+            moviekey={data.id + data.title}
+            key={data.id + data.title + index}
+          />
+        ))}
       </Box>
-    </Box>
 </LoadingAndError>
   );
 };

@@ -1,5 +1,5 @@
 import { loadingAndErrorType } from "./loadingAndError.type";
-import { movieType ,  orderObjType } from "./movie.type";
+import { movieType ,  orderObjType , watchListType } from "./movie.type";
 import { loadingAndState } from "./loadingAndState.type";
 import { watchListEndPoints } from "./watchlist.type";
 import { watchListRes } from "./watchListResposne.type";
@@ -14,5 +14,6 @@ export type {
     moviesState,
     filterPayload,
     orderPayload,
-    orderObjType
+    orderObjType,
+    watchListType
 }
