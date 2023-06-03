@@ -11,7 +11,10 @@ const endPoints: watchListEndPoints = {
 
 
 
-export const getMovies = (pageNum = 1) => {
+export const getMovies = (order:string | undefined ,pageNum = 1,) => {
+  if(order){
+    return backEndInstace.get(`${endPoints.getMoviesPage}/${pageNum}?rating=${order}`); 
+  }
   return backEndInstace.get(`${endPoints.getMoviesPage}/${pageNum}`);
 };
 

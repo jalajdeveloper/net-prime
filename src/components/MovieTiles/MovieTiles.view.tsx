@@ -54,17 +54,17 @@ const MovieTiles = (props: movieType) => {
   }
    const slicedText = sliceTextTo150Words(Overview)
 
-  useEffect(() => {
-    setState((prv: loadingAndState) => ({ ...prv, loading: true }));
-    checkWatchList(Id)
-      .then((res: AxiosResponse) => setIsInWatchList((res?.data.movieExist) as boolean))
-      .catch(() => {
-        setState((prv: loadingAndState) => ({ ...prv, error: true }));
-      })
-      .finally(() => {
-        setState((prv: loadingAndState) => ({ ...prv, loading: false }));
-      });
-  }, []);
+  // useEffect(() => {
+  //   setState((prv: loadingAndState) => ({ ...prv, loading: true }));
+  //   checkWatchList(Id)
+  //     .then((res: AxiosResponse) => setIsInWatchList((res?.data.movieExist) as boolean))
+  //     .catch(() => {
+  //       setState((prv: loadingAndState) => ({ ...prv, error: true }));
+  //     })
+  //     .finally(() => {
+  //       setState((prv: loadingAndState) => ({ ...prv, loading: false }));
+  //     });
+  // }, []);
 
   return (
     <AutoWidthCard key={MovieKey} sx={{position: "relative"}} data-testid="test-movies-id">

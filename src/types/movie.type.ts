@@ -15,3 +15,8 @@ export interface movieType {
     vote_count: number,
     moviekey: string
 }
+
+export interface orderObjType {
+    as: string,
+    de: string
+  }

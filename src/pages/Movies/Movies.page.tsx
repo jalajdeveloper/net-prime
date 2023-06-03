@@ -6,7 +6,7 @@ import { getMovies } from "../../services/Apis/movies";
 import { useEffect, useState, useMemo } from "react";
 import LoadingAndError from "../../components/LoadingAndError";
 import MovieTiles from "../../components/MovieTiles";
-import { movieType } from "../../types";
+import { movieType , orderObjType } from "../../types";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "../../redux/store";
 import { addMovies } from "../../redux/slices/movies.slice";
@@ -19,13 +19,19 @@ const Movies = () => {
     filterType,
     movieLanguage,
     yearOfRelease,
+    order
   } = useSelector((state: RootState) => state.movies);
   const dispatch: AppDispatch = useDispatch();
+  const [previousOrder , setPreviousOrder] = useState<string>("")
   const [page, setPage] = useState(1);
   const [state, setState] = useState<loadingAndState>({
     loading: false,
     error: false,
   });
+const orderObj: orderObjType = {
+  as: "asc",
+  de: "desc"
+}
 
   useEffect(() => {
     window.onscroll = function () {
@@ -36,10 +42,16 @@ const Movies = () => {
   }, []);
 
   useEffect(() => {
+    
+    const selectedOrder = orderObj[(order as keyof orderObjType)] ;
+    console.log(selectedOrder)
+   if(previousOrder !== selectedOrder) {
+    setPreviousOrder(selectedOrder);
+    dispatch(addMovies([]));
+   }
     setState((prv: loadingAndState) => ({ ...prv, loading: true }));
-    getMovies(page)
+    getMovies(selectedOrder ,page)
       .then((res: AxiosResponse) => {
-        console.log(res)
         dispatch(addMovies(res.data.results));
       })
       .catch((err: AxiosError) => {
@@ -48,7 +60,7 @@ const Movies = () => {
       .finally(() => {
         setState((prv: loadingAndState) => ({ ...prv, loading: false }));
       });
-  }, [page]);
+  }, [page , order]);
 
   const movies: movieType[] = useMemo(() => {
     const filterMovies: movieType[] = [];

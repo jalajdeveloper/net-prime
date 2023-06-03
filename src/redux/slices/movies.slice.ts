@@ -1,27 +1,30 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 import {
   movieType,
   moviesState,
   filterPayload,
   orderPayload,
-} from "../../types";
+} from '../../types';
 
 const initialState: moviesState = {
   movies: [],
-  movieLanguage: "",
-  filterType: "",
-  yearOfRelease: "",
-  order: "random",
+  movieLanguage: '',
+  filterType: '',
+  yearOfRelease: '',
+  order: 'random',
 };
 
 export const counterSlice = createSlice({
-  name: "movies",
+  name: 'movies',
   initialState,
   reducers: {
     addMovies: (state, action: PayloadAction<movieType[]>) => {
       const movieArray: movieType[] = [...state.movies, ...action.payload];
-
+      if (action.payload.length === 0) {
+        state.movies = [];
+        return;
+      }
       const jsonMovies = movieArray.map((movie: movieType) =>
         JSON.stringify(movie)
       );
@@ -34,34 +37,9 @@ export const counterSlice = createSlice({
     },
     sortMoviesByRating: (state, action: PayloadAction<orderPayload>) => {
       const {
-       
         payload: { order },
       } = action;
-      let sortedByRating: movieType[] = [];
-      if (order === "as") {
-        sortedByRating = ([...state.movies] || []).sort(
-          (a: movieType, b: movieType) => {
-            if (a.vote_average > b.vote_average) {
-              return 1;
-            } else {
-              return -1;
-            }
-          }
-        );
-      } else if (order === "de") {
-        sortedByRating = ([...state.movies] || []).sort(
-          (a: movieType, b: movieType) => {
-            if (a.vote_average > b.vote_average) {
-              return -1;
-            } else {
-              return 1;
-            }
-          }
-        );
-      }
-
       state.order = order;
-      state.movies = sortedByRating;
     },
 
     movieFilters: (state, action: PayloadAction<filterPayload>) => {
