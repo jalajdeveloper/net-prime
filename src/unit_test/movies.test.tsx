@@ -1,11 +1,11 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
-import { Provider } from "react-redux";
-import Movies from "../pages/Movies/Movies.page";
-import { store } from "../redux/store";
-import moviesMock from "./__mocks__/movie.mocks.json";
-import * as api from "../services/Apis/movies";
-import "@testing-library/jest-dom/extend-expect";
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import Movies from '../pages/Movies/Movies.page';
+import { store } from '../redux/store';
+import moviesMock from './__mocks__/movie.mocks.json';
+import * as api from '../services/Apis/movies';
+import '@testing-library/jest-dom/extend-expect';
 
 const asendingMovies = ([...moviesMock] || []).sort((a, b) => {
   if (a.vote_average > b.vote_average) {
@@ -23,20 +23,19 @@ const decendingMovies = ([...moviesMock] || []).sort((a, b) => {
   }
 });
 
-
-jest.mock("../services/Apis/movies");
+jest.mock('../services/Apis/movies');
 function sliceTextTo150Words(text: string) {
   text = text.trim();
-  const words = text.split(" ");
+  const words = text.split(' ');
   const slicedWords = words.slice(0, 150);
-  const slicedText = slicedWords.join(" ");
+  const slicedText = slicedWords.join(' ');
   return slicedText;
 }
 
-describe("MovieComponet", () => {
+describe('MovieComponet', () => {
   beforeEach(() => jest.clearAllMocks());
 
-  test("render and display movie tiltes", async () => {
+  test('render and display movie tiltes', async () => {
     (api.getMovies as jest.Mock).mockResolvedValue({
       data: { results: moviesMock },
     });
@@ -56,14 +55,14 @@ describe("MovieComponet", () => {
       </BrowserRouter>
     );
     await waitFor(() => {
-      const items = screen.getAllByTestId("test-movies-id");
-      const titles = screen.getAllByTestId("test-movies-title");
-      const rating = screen.getAllByTestId("test-movies-rating");
-      const releaseDate = screen.getAllByTestId("test-movies-release-data");
-      const overView = screen.getAllByTestId("test-movies-title-overview");
-      const watchList = screen.getAllByTestId("test-watched-button");
-      const sortingByRating = screen.getByTestId("sorting-button-test");
-      const languageSelect = screen.getByTestId("language-select-test");
+      const items = screen.getAllByTestId('test-movies-id');
+      const titles = screen.getAllByTestId('test-movies-title');
+      const rating = screen.getAllByTestId('test-movies-rating');
+      const releaseDate = screen.getAllByTestId('test-movies-release-data');
+      const overView = screen.getAllByTestId('test-movies-title-overview');
+      const watchList = screen.getAllByTestId('test-watched-button');
+      const sortingByRating = screen.getByTestId('sorting-button-test');
+      const languageSelect = screen.getByTestId('language-select-test');
 
       expect(items.length).toBe(moviesMock.length);
 
@@ -77,25 +76,22 @@ describe("MovieComponet", () => {
       });
       watchList.forEach((button) => {
         fireEvent.click(button);
-        expect(button).toHaveTextContent("Watched");
+        expect(button).toHaveTextContent('Watched');
       });
       fireEvent.click(sortingByRating);
 
-      const asendingRating = screen.getAllByTestId("test-movies-rating");
+      const asendingRating = screen.getAllByTestId('test-movies-rating');
 
       asendingMovies.forEach((movie, i) => {
         expect(asendingRating[i]).toHaveTextContent(`${movie.vote_average}`);
       });
 
       fireEvent.click(sortingByRating);
-      const decendingRating = screen.getAllByTestId("test-movies-rating");
+      const decendingRating = screen.getAllByTestId('test-movies-rating');
       decendingMovies.forEach((movie, i) => {
         expect(decendingRating[i]).toHaveTextContent(`${movie.vote_average}`);
       });
       fireEvent.click(languageSelect);
-      
     });
   });
 });
-
-

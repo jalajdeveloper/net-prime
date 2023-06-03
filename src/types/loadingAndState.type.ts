@@ -1,4 +1,4 @@
 export interface loadingAndState {
-    loading: boolean,
-    error: boolean
+  loading: boolean;
+  error: boolean;
 }

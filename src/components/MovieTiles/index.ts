@@ -1,1 +1,1 @@
-export {default} from "./MovieTiles.view";
+export { default } from './MovieTiles.view';

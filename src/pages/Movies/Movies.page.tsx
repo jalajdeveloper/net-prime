@@ -1,17 +1,16 @@
-
-import React from "react";
-import { Box, CircularProgress } from "@mui/material";
-import { AxiosResponse } from "axios";
-import { getMovies } from "../../services/Apis/movies";
-import { useEffect, useState, useMemo } from "react";
-import LoadingAndError from "../../components/LoadingAndError";
-import MovieTiles from "../../components/MovieTiles";
-import { movieType } from "../../types";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState, AppDispatch } from "../../redux/store";
-import { addMovies } from "../../redux/slices/movies.slice";
-import FilterBoxs from "../../components/FilterBoxs";
-import { loadingAndState } from "../../types";
+import React from 'react';
+import { Box, CircularProgress } from '@mui/material';
+import { AxiosResponse } from 'axios';
+import { getMovies } from '../../services/Apis/movies';
+import { useEffect, useState, useMemo } from 'react';
+import LoadingAndError from '../../components/LoadingAndError';
+import MovieTiles from '../../components/MovieTiles';
+import { movieType } from '../../types';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, AppDispatch } from '../../redux/store';
+import { addMovies } from '../../redux/slices/movies.slice';
+import FilterBoxs from '../../components/FilterBoxs';
+import { loadingAndState } from '../../types';
 
 const Movies = () => {
   const {
@@ -51,8 +50,8 @@ const Movies = () => {
 
   const movies: movieType[] = useMemo(() => {
     const filterMovies: movieType[] = [];
-    if (filterType === "language") {
-      if (movieLanguage === "all") {
+    if (filterType === 'language') {
+      if (movieLanguage === 'all') {
         return allMovies;
       }
 
@@ -66,14 +65,14 @@ const Movies = () => {
       return filterMovies;
     }
 
-    if (filterType === "year_of_release") {
+    if (filterType === 'year_of_release') {
       for (let i = 0; i < allMovies.length; i++) {
         const movie: movieType = allMovies[i];
-        if (yearOfRelease === "all_years") {
+        if (yearOfRelease === 'all_years') {
           return allMovies;
         }
         if (
-          (movie.release_date || "0000-00-00").split("-")[0] === yearOfRelease
+          (movie.release_date || '0000-00-00').split('-')[0] === yearOfRelease
         ) {
           filterMovies.push(movie);
         }
@@ -84,21 +83,30 @@ const Movies = () => {
     return allMovies;
   }, [page, filterType, yearOfRelease, movieLanguage, allMovies]);
 
-  const loadingInfinty = () =>{
-    if(page > 1 && state.loading)
-    { 
-      return <Box sx={{ display: "flex", justifyContent: "center" }}>
-      <CircularProgress size="6rem" />
-    </Box>
+  const loadingInfinty = () => {
+    if (page > 1 && state.loading) {
+      return (
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <CircularProgress size="6rem" />
+        </Box>
+      );
     }
 
-    return <div/>
-  }
+    return <div />;
+  };
 
   return (
     <LoadingAndError error={state.error} loading={state.loading} page={page}>
       <FilterBoxs />
-      <Box sx={{ display: "flex", flexWrap: "wrap", gap: "1%" , paddingLeft: "2%" , paddingRight: "2%" }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '1%',
+          paddingLeft: '2%',
+          paddingRight: '2%',
+        }}
+      >
         {movies.map((data: movieType, index: number) => (
           <MovieTiles
             {...data}

@@ -2,10 +2,7 @@
   {
     "adult": false,
     "backdrop_path": "/bxY7ve1LP8atCIuvr4jeeJMmU4w.jpg",
-    "genre_ids": [
-      35,
-      18
-    ],
+    "genre_ids": [35, 18],
     "id": 37165,
     "original_language": "en",
     "original_title": "The Truman Show",
@@ -21,12 +18,7 @@
   {
     "adult": false,
     "backdrop_path": "/jsgRkhPxYtzAhDFCUyNbvlX63tY.jpg",
-    "genre_ids": [
-      10749,
-      10751,
-      16,
-      14
-    ],
+    "genre_ids": [10749, 10751, 16, 14],
     "id": 10020,
     "original_language": "en",
     "original_title": "Beauty and the Beast",
@@ -42,11 +34,7 @@
   {
     "adult": false,
     "backdrop_path": "/Ktn3lkVHlaLpymvp7cCIPdb65g.jpg",
-    "genre_ids": [
-      16,
-      28,
-      878
-    ],
+    "genre_ids": [16, 28, 878],
     "id": 39108,
     "original_language": "ja",
     "original_title": "ドラゴンボールZ 龍拳爆発!!悟空がやらねば誰がやる",
@@ -62,11 +50,7 @@
   {
     "adult": false,
     "backdrop_path": "/nv5wwZou159v5OC61i4ElR7OqyY.jpg",
-    "genre_ids": [
-      14,
-      16,
-      12
-    ],
+    "genre_ids": [14, 16, 12],
     "id": 4935,
     "original_language": "ja",
     "original_title": "ハウルの動く城",
@@ -82,13 +66,7 @@
   {
     "adult": false,
     "backdrop_path": "/jJKZaTBNenlFclQyjrnvzkRmvWE.jpg",
-    "genre_ids": [
-      16,
-      10751,
-      12,
-      18,
-      35
-    ],
+    "genre_ids": [16, 10751, 12, 18, 35],
     "id": 150540,
     "original_language": "en",
     "original_title": "Inside Out",
@@ -104,11 +82,7 @@
   {
     "adult": false,
     "backdrop_path": "/A65oYGOeBQDoxhwkeVLnBPNWItK.jpg",
-    "genre_ids": [
-      12,
-      35,
-      10751
-    ],
+    "genre_ids": [12, 35, 10751],
     "id": 892527,
     "original_language": "fr",
     "original_title": "King",
@@ -124,10 +98,7 @@
   {
     "adult": false,
     "backdrop_path": "/d3l7kgFJyLTTQSrR4ysCk5yeVyW.jpg",
-    "genre_ids": [
-      28,
-      18
-    ],
+    "genre_ids": [28, 18],
     "id": 579974,
     "original_language": "te",
     "original_title": "రౌద్రం రణం రుధిరం",
@@ -143,10 +114,7 @@
   {
     "adult": false,
     "backdrop_path": "/sx8dsHlsZAoT1BbWDwFGDgWAOlZ.jpg",
-    "genre_ids": [
-      18,
-      35
-    ],
+    "genre_ids": [18, 35],
     "id": 691422,
     "original_language": "en",
     "original_title": "When You Finish Saving the World",
@@ -162,10 +130,7 @@
   {
     "adult": false,
     "backdrop_path": "/4mfFtlGeInPrQVm1hpv7th02yjx.jpg",
-    "genre_ids": [
-      27,
-      53
-    ],
+    "genre_ids": [27, 53],
     "id": 259693,
     "original_language": "en",
     "original_title": "The Conjuring 2",
@@ -181,11 +146,7 @@
   {
     "adult": false,
     "backdrop_path": "/cCvp5Sni75agCtyJkNOMapORUQV.jpg",
-    "genre_ids": [
-      28,
-      80,
-      18
-    ],
+    "genre_ids": [28, 80, 18],
     "id": 111,
     "original_language": "en",
     "original_title": "Scarface",
@@ -201,10 +162,7 @@
   {
     "adult": false,
     "backdrop_path": "/kZ7unRnWe8UwpJsc1n5venXr9u2.jpg",
-    "genre_ids": [
-      18,
-      28
-    ],
+    "genre_ids": [18, 28],
     "id": 619329,
     "original_language": "ta",
     "original_title": "முந்திரிக்காடு",
@@ -220,11 +178,7 @@
   {
     "adult": false,
     "backdrop_path": "/wdwcOBMkt3zmPQuEMxB3FUtMio2.jpg",
-    "genre_ids": [
-      12,
-      28,
-      878
-    ],
+    "genre_ids": [12, 28, 878],
     "id": 271110,
     "original_language": "en",
     "original_title": "Captain America: Civil War",
@@ -240,11 +194,7 @@
   {
     "adult": false,
     "backdrop_path": "/z2UtGA1WggESspi6KOXeo66lvLx.jpg",
-    "genre_ids": [
-      878,
-      53,
-      27
-    ],
+    "genre_ids": [878, 53, 27],
     "id": 520763,
     "original_language": "en",
     "original_title": "A Quiet Place Part II",
@@ -260,11 +210,7 @@
   {
     "adult": false,
     "backdrop_path": "/tm1kAqfiElwOgXLI8goHBqhIWIM.jpg",
-    "genre_ids": [
-      28,
-      80,
-      53
-    ],
+    "genre_ids": [28, 80, 53],
     "id": 829799,
     "original_language": "en",
     "original_title": "Paradise City",
@@ -280,9 +226,7 @@
   {
     "adult": false,
     "backdrop_path": "/7cjY1IIrW1RwmHN8USPryKTAQHq.jpg",
-    "genre_ids": [
-      27
-    ],
+    "genre_ids": [27],
     "id": 988165,
     "original_language": "en",
     "original_title": "H.P. Lovecraft's Witch House",
@@ -298,11 +242,7 @@
   {
     "adult": false,
     "backdrop_path": "/w1oD1MzHjnBJc5snKupIQaSBLIh.jpg",
-    "genre_ids": [
-      14,
-      28,
-      12
-    ],
+    "genre_ids": [14, 28, 12],
     "id": 559,
     "original_language": "en",
     "original_title": "Spider-Man 3",
@@ -318,10 +258,7 @@
   {
     "adult": false,
     "backdrop_path": "/nyRlcuwCtJVjuwYbAODMTUSixCw.jpg",
-    "genre_ids": [
-      53,
-      18
-    ],
+    "genre_ids": [53, 18],
     "id": 1071806,
     "original_language": "th",
     "original_title": "คนหิว เกมกระหาย",
@@ -337,12 +274,7 @@
   {
     "adult": false,
     "backdrop_path": "/hGGC9gKo7CFE3fW07RA587e5kol.jpg",
-    "genre_ids": [
-      16,
-      35,
-      10751,
-      12
-    ],
+    "genre_ids": [16, 35, 10751, 12],
     "id": 14160,
     "original_language": "en",
     "original_title": "Up",
@@ -358,12 +290,7 @@
   {
     "adult": false,
     "backdrop_path": "/mabuNsGJgRuCTuGqjFkWe1xdu19.jpg",
-    "genre_ids": [
-      28,
-      12,
-      16,
-      10751
-    ],
+    "genre_ids": [28, 12, 16, 10751],
     "id": 260513,
     "original_language": "en",
     "original_title": "Incredibles 2",
@@ -379,11 +306,7 @@
   {
     "adult": false,
     "backdrop_path": "/zcySy6dnSmyqiichtDgO7AEeZoq.jpg",
-    "genre_ids": [
-      28,
-      18,
-      53
-    ],
+    "genre_ids": [28, 18, 53],
     "id": 254128,
     "original_language": "en",
     "original_title": "San Andreas",

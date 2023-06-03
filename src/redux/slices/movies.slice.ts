@@ -1,22 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 import {
   movieType,
   moviesState,
   filterPayload,
   orderPayload,
-} from "../../types";
+} from '../../types';
 
 const initialState: moviesState = {
   movies: [],
-  movieLanguage: "",
-  filterType: "",
-  yearOfRelease: "",
-  order: "random",
+  movieLanguage: '',
+  filterType: '',
+  yearOfRelease: '',
+  order: 'random',
 };
 
 export const counterSlice = createSlice({
-  name: "movies",
+  name: 'movies',
   initialState,
   reducers: {
     addMovies: (state, action: PayloadAction<movieType[]>) => {
@@ -34,11 +34,10 @@ export const counterSlice = createSlice({
     },
     sortMoviesByRating: (state, action: PayloadAction<orderPayload>) => {
       const {
-       
         payload: { order },
       } = action;
       let sortedByRating: movieType[] = [];
-      if (order === "as") {
+      if (order === 'as') {
         sortedByRating = ([...state.movies] || []).sort(
           (a: movieType, b: movieType) => {
             if (a.vote_average > b.vote_average) {
@@ -48,7 +47,7 @@ export const counterSlice = createSlice({
             }
           }
         );
-      } else if (order === "de") {
+      } else if (order === 'de') {
         sortedByRating = ([...state.movies] || []).sort(
           (a: movieType, b: movieType) => {
             if (a.vote_average > b.vote_average) {
