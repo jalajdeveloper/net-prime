@@ -40,7 +40,6 @@ const Movies = () => {
     if (inView) {
       setPage((p) => p + 1);
     }
-    console.log(inView);
   }, [inView]);
 
   useEffect(() => {
