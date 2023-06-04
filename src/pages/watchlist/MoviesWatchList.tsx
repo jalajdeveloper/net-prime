@@ -21,6 +21,7 @@ const MoviesWatchList = () => {
     setState((prv: loadingAndState) => ({ ...prv, loading: true }));
     getWatchListMovies()
       .then((res: AxiosResponse) => {
+        console.log(res)
             setWatchList(res.data.results)
       } 
       )
@@ -45,15 +46,17 @@ const MoviesWatchList = () => {
           paddingRight: '2%',
         }}
       >
-         {watchList.map((data: movieType, index: number) => (
+         {watchList.length ? 
+        watchList.map((data: movieType, index: number) => (
           <MovieTiles
             {...data}
             moviekey={data.id + data.title}
             key={data.id + data.title + index}
           />
-        ))}
+        )) :  <Typography variant="h4">Start Adding Movies In Your WatchList</Typography> 
+        }
       </Box>
 </LoadingAndError>
   );
-};
+}
 export default MoviesWatchList;

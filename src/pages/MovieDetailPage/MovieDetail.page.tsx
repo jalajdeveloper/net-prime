@@ -61,7 +61,7 @@ const MovieDetail = () => {
     addToWatchList(addToWatch).then((res: AxiosResponse) => {
       setIsInWatchList(res?.data.movieExist as boolean);
     }).catch((err) => {
-setErrorMessage(err.response.data.msg)
+    setErrorMessage(err.response.data.msg)
     });
   };
 
@@ -130,7 +130,7 @@ setErrorMessage(err.response.data.msg)
           <Typography variant="h5" color="text.secondary">
             {movie?.overview}
           </Typography>
-          
+            
         </div>
       </Box>
     </LoadingAndError>

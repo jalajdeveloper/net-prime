@@ -11,7 +11,7 @@ import { RootState, AppDispatch } from '../../redux/store';
 import { addMovies } from '../../redux/slices/movies.slice';
 import FilterBoxs from '../../components/FilterBoxs';
 import { loadingAndState } from '../../types';
-import { useInView } from 'react-intersection-observer'
+import { useInView } from 'react-intersection-observer';
 
 const Movies = () => {
   const {
@@ -23,7 +23,7 @@ const Movies = () => {
   } = useSelector((state: RootState) => state.movies);
   const dispatch: AppDispatch = useDispatch();
   const observerTarget = useRef(null);
-  const { ref, inView } = useInView()
+  const { ref, inView } = useInView();
   const [previousOrder, setPreviousOrder] = useState<string | undefined>();
   const [page, setPage] = useState(1);
   const [state, setState] = useState<loadingAndState>({
@@ -38,13 +38,16 @@ const Movies = () => {
 
   useEffect(() => {
     if (inView) {
-      setPage(p => p + 1)
+      setPage((p) => p + 1);
     }
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
-          setPage((p) => p + 1);
-        }
+        entries.forEach(({ target, intersectionRatio, isIntersecting }) => {
+          console.log(target, intersectionRatio, isIntersecting);
+          if (intersectionRatio >= 0.1) {
+            setPage((p) => p + 1);
+          }
+        });
       },
       {
         root: null,
@@ -56,11 +59,11 @@ const Movies = () => {
       observer.observe(observerTarget.current);
     }
 
-    // return () => {
-    //   if (observerTarget.current) {
-    //     observer.unobserve(observerTarget.current);
-    //   }
-    // };
+    return () => {
+      if (observerTarget.current) {
+        observer.unobserve(observerTarget.current);
+      }
+    };
   }, [observerTarget, ref]);
 
   useEffect(() => {
@@ -114,19 +117,7 @@ const Movies = () => {
     }
 
     return allMovies;
-  }, [page, filterType, yearOfRelease, movieLanguage, allMovies , order]);
-
-  const loadingInfinty = () => {
-    if (page > 1 && state.loading) {
-      return (
-        <Box sx={{ display: 'flex', placeContent: 'center', height: "200px" }}>
-          <CircularProgress size="3rem" />
-        </Box>
-      );
-    }
-
-    return <div />;
-  };
+  }, [page, filterType, yearOfRelease, movieLanguage, allMovies, order]);
 
   return (
     <LoadingAndError error={state.error} loading={state.loading} page={page}>
@@ -141,19 +132,26 @@ const Movies = () => {
         }}
       >
         {movies.map((data: movieType, index: number) => (
-          <MovieTiles
-            {...data}
-            moviekey={`${index}`}
-            key={`${index}`}
-          />
+          <MovieTiles {...data} moviekey={`${index}`} key={`${index}`} />
         ))}
       </Box>
-      <div
+      <Box
+        sx={{
+          display: 'flex',
+          placeContent: 'center',
+          height: '200px',
+          border: '2px solid #fff',
+        }}
+      >
+        <CircularProgress
+          size="3rem"
           ref={observerTarget}
-          style={{ height: '100px',marginBottom: "100px", border: "2px solid white" }}
-          id='infinite-loader'
+          sx={{
+            marginTop: '60px',
+            display: `${page % 2 === 0 ? 'flex' : 'block'}`,
+          }}
         />
-      {loadingInfinty()}
+      </Box>
     </LoadingAndError>
   );
 };
