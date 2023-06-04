@@ -43,7 +43,8 @@ const Movies = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(({ target, intersectionRatio, isIntersecting }) => {
-          if (intersectionRatio >= 0.1) {
+          console.log(intersectionRatio,isIntersecting)
+          if (intersectionRatio >= 0.1 && isIntersecting) {
             setPage((p) => p + 1);
           }
         });
