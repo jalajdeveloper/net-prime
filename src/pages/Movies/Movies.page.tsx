@@ -40,31 +40,8 @@ const Movies = () => {
     if (inView) {
       setPage((p) => p + 1);
     }
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(({ target, intersectionRatio, isIntersecting }) => {
-
-          if (intersectionRatio >= 0.1 && isIntersecting) {
-            setPage((p) => p + 1);
-          }
-        });
-      },
-      {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.5,
-      }
-    );
-    if (observerTarget.current) {
-      observer.observe(observerTarget.current);
-    }
-
-    return () => {
-      if (observerTarget.current) {
-        observer.unobserve(observerTarget.current);
-      }
-    };
-  }, [observerTarget, ref]);
+    console.log(inView);
+  }, [inView]);
 
   useEffect(() => {
     const selectedOrder = orderObj[order as keyof orderObjType];
@@ -119,6 +96,13 @@ const Movies = () => {
     return allMovies;
   }, [page, filterType, yearOfRelease, movieLanguage, allMovies, order]);
 
+  useEffect(() => {
+    const selectedOrder = orderObj[order as keyof orderObjType];
+    if (previousOrder !== selectedOrder) {
+      setPage(1)
+    }
+  },[order])
+
   return (
     <LoadingAndError error={state.error} loading={state.loading} page={page}>
       <FilterBoxs />
@@ -142,6 +126,7 @@ const Movies = () => {
           height: '200px',
           border: '2px solid #fff',
         }}
+        ref={ref}
       >
         <CircularProgress
           size="3rem"
