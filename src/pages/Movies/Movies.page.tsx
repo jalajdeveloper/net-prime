@@ -43,7 +43,6 @@ const Movies = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(({ target, intersectionRatio, isIntersecting }) => {
-          console.log(target, intersectionRatio, isIntersecting);
           if (intersectionRatio >= 0.1) {
             setPage((p) => p + 1);
           }
@@ -52,7 +51,7 @@ const Movies = () => {
       {
         root: null,
         rootMargin: '0px',
-        threshold: 1.0,
+        threshold: 0.5,
       }
     );
     if (observerTarget.current) {
