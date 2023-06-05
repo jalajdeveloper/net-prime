@@ -116,7 +116,7 @@ const FilterBoxs = () => {
           variant="outlined"
           sx={{ height: '100%' }}
           onClick={() => dispatch(sortMoviesByRating({ order: 'all' } ))}
-          data-testid="sorting-button-test"
+          data-testid="sorting-all-test"
         >
         All Movies
         </Button>
@@ -126,7 +126,7 @@ const FilterBoxs = () => {
         <Button
           variant="outlined"
           sx={{ height: '100%' }}
-          data-testid="sorting-button-test"
+          data-testid="sorting-watch-list-test"
         >
       Watch List
         </Button>

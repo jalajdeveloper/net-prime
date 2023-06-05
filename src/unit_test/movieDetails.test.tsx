@@ -3,6 +3,7 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { getMovieDetail } from '../services/Apis/movies';
 import * as api from '../services/Apis/movies';
 import MovieDetail from '../pages/MovieDetailPage/MovieDetail.page';
+import moviesMock from './__mocks__/movie.mocks.json';
 
 jest.mock('../services/Apis/movies');
 
@@ -35,6 +36,10 @@ describe('MovieDetail component', () => {
         vote_average: 7.5,
       },
     });
+    (api.checkWatchList as jest.Mock).mockResolvedValue({
+      data: { results: moviesMock },
+    });
+
   });
   it('renders loading state and fetches movie details', async () => {
     (api.getMovieDetail as jest.Mock).mockResolvedValue({

@@ -21,6 +21,7 @@ const LoadingAndError = (props: loadingAndErrorType) => {
           flexWrap: 'wrap',
         }}
         role="loading-element"
+        data-testid="loading-comp-test"
       >
         <CircularProgress
           size={componentName === 'tiles' ? 30 : 50}

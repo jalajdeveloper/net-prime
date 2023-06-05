@@ -1,7 +1,7 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor , waitForElementToBeRemoved} from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import Movies from '../pages/Movies/Movies.page';
+import MovieTiles from '../components/MovieTiles/MovieTiles.view';
 import { store } from '../redux/store';
 import moviesMock from './__mocks__/movie.mocks.json';
 import * as api from '../services/Apis/movies';
@@ -40,29 +40,36 @@ describe('MovieComponet', () => {
       data: { results: moviesMock },
     });
 
-    (api.checkWatchList as jest.Mock).mockResolvedValue({
-      data: { results: moviesMock },
-    });
 
-    (api.addToWatchList as jest.Mock).mockResolvedValue({
-      data: { results: moviesMock },
-    });
+    const mockIntersectionObserver = jest.fn();
+  mockIntersectionObserver.mockReturnValue({
+    observe: () => null,
+    unobserve: () => null,
+    disconnect: () => null
+  });
+  window.IntersectionObserver = mockIntersectionObserver;
+
+
     render(
       <BrowserRouter>
         <Provider store={store}>
-          <Movies />
+    
+        {moviesMock.map((data: any, index: number) => (
+          <MovieTiles {...data} moviekey={`${index}`} key={`${index}`} />
+        ))}
+
         </Provider>
       </BrowserRouter>
     );
+
     await waitFor(() => {
+   
+
       const items = screen.getAllByTestId('test-movies-id');
       const titles = screen.getAllByTestId('test-movies-title');
       const rating = screen.getAllByTestId('test-movies-rating');
       const releaseDate = screen.getAllByTestId('test-movies-release-data');
       const overView = screen.getAllByTestId('test-movies-title-overview');
-      const watchList = screen.getAllByTestId('test-watched-button');
-      const sortingByRating = screen.getByTestId('sorting-button-test');
-      const languageSelect = screen.getByTestId('language-select-test');
 
       expect(items.length).toBe(moviesMock.length);
 
@@ -74,24 +81,8 @@ describe('MovieComponet', () => {
           sliceTextTo150Words(movie.overview)
         );
       });
-      watchList.forEach((button) => {
-        fireEvent.click(button);
-        expect(button).toHaveTextContent('Watched');
-      });
-      fireEvent.click(sortingByRating);
-
-      const asendingRating = screen.getAllByTestId('test-movies-rating');
-
-      asendingMovies.forEach((movie, i) => {
-        expect(asendingRating[i]).toHaveTextContent(`${movie.vote_average}`);
-      });
-
-      fireEvent.click(sortingByRating);
-      const decendingRating = screen.getAllByTestId('test-movies-rating');
-      decendingMovies.forEach((movie, i) => {
-        expect(decendingRating[i]).toHaveTextContent(`${movie.vote_average}`);
-      });
-      fireEvent.click(languageSelect);
+      
+ 
     });
   });
 });

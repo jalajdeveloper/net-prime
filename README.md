@@ -38,7 +38,37 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 
 ## Architectural decisions
-Decieded to store the all movies in a array to cache so application dont fetch movies from db every time . Another reason to store movies in the array so the users can have smooth transtion between filters and sorting soo user dont have to wait and watch the loader.
+Decieded to store the all movies in a array to cache so application dont fetch movies from db every time.
 
 ## Design assumptions made
 Did not about how much languages and year so i added the myself.
+
+## About App
+
+In this application the api call is made with the help of axios. For the state manegment solution i used redux/toolkit.
+. For Trigering the infinity scrolling i used a library called react-intersection-observer . Because vanilla js libary wasnt working properly with react because of the synthetic events . For UI library i used MUI.
+
+## API ENDPOINTS
+
+GET 
+To Get The Movies
+/api/v1/tmdb/movies/get-movies/:pageNumber
+
+
+ GET
+ To Get The Movie Deat
+ Movie Details
+ /api/v1/tmdb/movies/get-movie-details/:movieId
+
+ POST
+ Add To WatchList
+/api/v1/tmdb/movies/movies/add-to-watch-list/:movieId
+
+GET 
+To Get Movies Details
+/api/v1/tmdb/movies/get-movie-details
+
+GET
+To Check Watch List If Movie Exists
+/api/v1/tmdb/movies/check-watch-list
+
